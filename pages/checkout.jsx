@@ -2,10 +2,10 @@
 
 import React from "react";
 import { useState } from "react";
-import { IoIosAddCircle } from "@react-icons/all-files/Io/IoIosAddCircle";
-import { FiMinusCircle } from "@react-icons/all-files/Fi/FiMinusCircle";
+import { FaCircleMinus, FaCirclePlus } from "react-icons/fa6";
 import {  removeFromCart,  increment,   mycart, totalAmount } from "@/redux/cartSlice";
 import { useSelector, useDispatch } from 'react-redux'
+import Link from "next/link";
 
 
 const Checkout = () => {
@@ -178,14 +178,14 @@ const Checkout = () => {
                   <li key={item.itemCode}>
                     <div className="flex my-5">
                       <div className="font-semibold w-2/3 "> {item.title}</div>
-                      <IoIosAddCircle
+                      <FaCirclePlus
                         className="cursor-pointer mt-1"
                         onClick={() => {
                           dispatch(increment(item.itemCode));
                         }}
                       />{" "}
                       <span className="mx-2">{item.quantity}</span>{" "}
-                      <FiMinusCircle
+                      <FaCircleMinus
                         className="cursor-pointer mt-1"
                         onClick={() => {
                           dispatch(removeFromCart(item.itemCode));
@@ -203,6 +203,9 @@ const Checkout = () => {
     </div>
                   <div> Subtotal: {subTotal}</div>
                 </div>
+                <Link href={"/order"}>
+                <button className="flex mx-auto bg-slate-200 border-0 py-2 px-8 focus:outline-none hover:bg-slate-600 rounded text-lg">Pay Now</button>
+                </Link>
               </div>
             </div>
           </section>

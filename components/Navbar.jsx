@@ -1,8 +1,7 @@
 import React, { useRef } from "react";
 import Link from "next/link";
-import { IoIosAddCircle } from "@react-icons/all-files/Io/IoIosAddCircle";
-import { FiMinusCircle } from "@react-icons/all-files/Fi/FiMinusCircle";
-import { FaShoppingCart } from "@react-icons/all-files/fa/FaShoppingCart";
+import {FaCirclePlus, FaCircleMinus, FaCartShopping} from "react-icons/fa6";
+import { MdAccountCircle } from "react-icons/md";
 import {  removeFromCart, clearCart, increment, loadCart } from "@/redux/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -54,9 +53,9 @@ const Navbar = () => {
           </Link>
         </ul>
       </div>
-      <div onClick={toggleCart} className="cart absolute right-0 top-8 mx-5">
-        <FaShoppingCart className="text-xl md:text-3xl " />
-        <div className="absolute -top-4 right-1"></div>
+      <div onClick={toggleCart} className="flex gap-4 cart absolute right-0 top-8 mx-5">
+        <FaCartShopping className="text-xl md:text-3xl " />
+        <MdAccountCircle className="text-xl md:text-3xl" />
       </div>
       <div
         ref={ref}
@@ -81,14 +80,14 @@ const Navbar = () => {
                   <li key={item.itemCode}>
                     <div className="flex my-5">
                       <div className="font-semibold w-2/3 "> {item.title}</div>
-                      <IoIosAddCircle
+                      <FaCirclePlus
                         className="cursor-pointer mt-1"
                         onClick={() => {
                           dispatch(increment(item.itemCode));
                         }}
                       />{" "}
                       <span className="mx-2">{item.quantity}</span>{" "}
-                      <FiMinusCircle
+                      <FaCircleMinus
                         className="cursor-pointer mt-1"
                         onClick={() => {
                           dispatch(removeFromCart(item.itemCode));
