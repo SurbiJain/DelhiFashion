@@ -53,9 +53,11 @@ const Navbar = () => {
           </Link>
         </ul>
       </div>
-      <div onClick={toggleCart} className="flex gap-4 cart absolute right-0 top-8 mx-5">
-        <FaCartShopping className="text-xl md:text-3xl " />
+      <div  className="flex gap-4 cart absolute right-0 top-8 mx-5">
+        <FaCartShopping onClick={toggleCart} className="text-xl md:text-3xl " />
+        <Link href={'/login'}>
         <MdAccountCircle className="text-xl md:text-3xl" />
+        </Link>
       </div>
       <div
         ref={ref}

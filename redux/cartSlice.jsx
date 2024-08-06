@@ -55,13 +55,12 @@ export const cartSlice = createSlice({
     },
 
     removeFromCart(state, action) {
-      console.log("removed", action.payload);
+   
       state.cart = state.cart
         .map((item) => {
           if (item.itemCode === action.payload) {
             item.quantity -= 1;
             item.price -= 700;
-            console.log("removed", item.quantity, item.price);
             item.price--;
           }
           return item;
@@ -79,7 +78,7 @@ export const cartSlice = createSlice({
         if (localStorage.getItem("cart") !== null) {
           return (state = JSON.parse(localStorage.getItem("cart")));
         } else if (!localStorage.getItem("cart")) {
-          return console.log("i am running"), (state = state);
+          return  (state = state);
         }
       } catch (error) {
         console.log(error);
