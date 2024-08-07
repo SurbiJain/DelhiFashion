@@ -3,12 +3,14 @@ import React, { useState } from "react";
 const AddProduct = () => {
   const [dataResponse, setDataResponse] = useState();
   const [product, setProduct] = useState({
-    product_id: "",
-    productName: "",
-    price: "",
-    quantity: "",
+    title: "",
+    about: "",
+    img: "",
+    category: "",
     size: "",
-    src: "",
+    color:"",
+    price: "",
+    availableQty: "",
   });
 
   const handleChange = (e) => {
@@ -31,38 +33,62 @@ const AddProduct = () => {
   }
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+    console.log(product)
     handleAddProduct();
     setProduct({
-      product_id: "",
-      productName: "",
-      price: "",
-      quantity: "",
+      title: "",
+      about: "",
+      img: "",
+      category: "",
       size: "",
-      src: "",
+      color:"",
+      price: "",
+      availableQty: "",
     });
   };
 
   return (
     <form onSubmit={handleSubmit} className="product-form">
-      <div className="form-group">
-        <label htmlFor="id">Product ID:</label>
+     <div className="form-group">
+        <label htmlFor="name">Product Name:</label>
         <input
           type="text"
-          id="product_id"
-          name="product_id"
-          value={product.product_id}
+          id="title"
+          name="title"
+          value={product.title}
           onChange={handleChange}
           required
         />
       </div>
       <div className="form-group">
-        <label htmlFor="name">Product Name:</label>
+        <label htmlFor="id">Description</label>
         <input
           type="text"
-          id="productName"
-          name="productName"
-          value={product.productName}
+          id="about"
+          name="about"
+          value={product.about}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="image">Image URL:</label>
+        <input
+          type="text"
+          id="img"
+          name="img"
+          value={product.img}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="image">Category</label>
+        <input
+          type="text"
+          id="category"
+          name="category"
+          value={product.category}
           onChange={handleChange}
           required
         />
@@ -79,16 +105,17 @@ const AddProduct = () => {
         />
       </div>
       <div className="form-group">
-        <label htmlFor="image">Quantity:</label>
+        <label htmlFor="image">Color</label>
         <input
-          type="number"
-          id="quantity"
-          name="quantity"
-          value={product.quantity}
+          type="text"
+          id="color"
+          name="color"
+          value={product.color}
           onChange={handleChange}
           required
         />
       </div>
+      
       <div className="form-group">
         <label htmlFor="image">Price:</label>
         <input
@@ -101,16 +128,17 @@ const AddProduct = () => {
         />
       </div>
       <div className="form-group">
-        <label htmlFor="image">Image URL:</label>
+        <label htmlFor="image">Quantity:</label>
         <input
-          type="text"
-          id="src"
-          name="src"
-          value={product.src}
+          type="number"
+          id="availableQty"
+          name="availableQty"
+          value={product.availableQty}
           onChange={handleChange}
           required
         />
       </div>
+      
       <button type="submit">Add Product</button>
     </form>
   );
