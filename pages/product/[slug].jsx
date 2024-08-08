@@ -1,10 +1,11 @@
 import React, {useState } from "react";
 
-import { addToCart } from "@/redux/cartSlice";
+import { addToCart, buyNow } from "@/redux/cartSlice";
 import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 
 const Product = ({ product, variants }) => {
-  const [quantity, setQuantity] = useState();
+  const [quantity, setQuantity] = useState('');
   const [size, setSize] = useState(product.size);
   const [color, setColor] = useState(product.color);
   const dispatch = useDispatch();
@@ -13,17 +14,30 @@ const Product = ({ product, variants }) => {
     window.location = url;  
     
   }
+   const router = useRouter()
   console.log(variants)
   const handleAddCart = (item) => {
     dispatch(
       addToCart({
         itemCode: item.id,
-        quantity,
-        price: Number(item.price) * quantity,
+        quantity: Number(quantity),
+        price: Number(item.price) * Number(quantity),
         title: item.title,
       })
     );
   };
+  const handleBuyNow = (item)=>{
+    dispatch(
+      buyNow({
+        itemCode: item.id,
+        quantity: quantity,
+        price: Number(item.price) * Number(quantity),
+        title: item.title,
+       
+      }),
+      router.push("../checkout")
+    );
+  }
   return (
     <>
       <section className="text-gray-600 body-font">
@@ -33,7 +47,7 @@ const Product = ({ product, variants }) => {
         >
           <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
             <h1 className="title-font sm:text-2xl text-xl mb-4 font-medium text-gray-900">
-              {product.title}
+              {product.title} ({product.size}/{product.color})
             </h1>
             <h3 className="title-font sm:text-2xl text-xl mb-4 font-medium text-gray-600">
               Before they sold out
@@ -49,6 +63,14 @@ const Product = ({ product, variants }) => {
                 className="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded ml-4"
               >
                 Add to cart
+              </button>
+              <button
+                onClick={() => {
+                  handleBuyNow(product);
+                }}
+                className="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded ml-4"
+              >
+               Buy now
               </button>
               
               
